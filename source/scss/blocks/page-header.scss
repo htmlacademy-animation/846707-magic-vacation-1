@@ -35,6 +35,16 @@
   padding: 1rem 0;
   width: 10rem;
   color: $c-light;
+  transform: translateX(-40px);
+  opacity: 0;
+
+  .page-load & {
+    transform: translateX(0);
+    opacity: 1;
+    transition-duration: 0.4s;
+    transition-delay: 0.2s;
+    transition-timing-function: cubic-bezier(0, 1, 0.3, 1);
+  }
 
   @media (min-width: $stop-scaling) {
     top: -5px;
@@ -81,6 +91,8 @@
   background-color: $c-light;
   border-radius: 50%;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0, 1, 0.3, 1);
 
   @media (max-width: $tablet) and (orientation: portrait) {
     display: block;
@@ -88,6 +100,10 @@
 
   @media (max-width: $mobile) and (orientation: landscape) {
     display: block;
+  }
+
+  .page-load & {
+    opacity: 1;
   }
 
   &::before,
@@ -130,6 +146,12 @@
 .page-header__nav {
   display: flex;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0, 1, 0.3, 1) 0.2s;
+
+  .page-load & {
+    opacity: 1;
+  }
 
   @media (max-width: $tablet) and (orientation: portrait) {
     position: fixed;
@@ -268,9 +290,11 @@
     }
 
     &.active {
-      &::after {
-        display: block;
-        transform: scaleX(1);
+      .page-load & {
+        &::after {
+          display: block;
+          transform: scaleX(1);
+        }
       }
     }
 
